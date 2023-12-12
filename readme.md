@@ -1,10 +1,8 @@
-# ![CloudFormation-Icon](Images/CloudFormation-Icon.png)  AWS CloudFormation StackSet Configuration IAM Roles  
+# ![CloudFormation-Icon](Images/CloudFormation-Icon.png)  AWS CloudFormation StackSet Configuration & Roles
 
 <br>  
 
 ## Description
-
------  
 
 Stacksets allow the ability to deploy a single AWS CloudFormation template into multiple accounts, or multiple regions within an account from a single template deployment within a centralized AWS *Master* account. The following CloudFormation template will create the 2 roles necessary to enable the ability to utilize stacksets. This same template can be deployed in both the master and any member accounts. Based on the values supplied for the included parameters, the template will create 1/2 roles. When the template is deployed, if the `StackSetMasterAccount` parameter is set to **Yes**, then the master stackset admin role will be created. The **master** role has a policy defined that allows the master role the permission to assume the member role in any account. If the `StackSetMasterAccount` parameter is set to **No**, then the stackset member role will be created in the account, which grants access only to the stackset master role, and will grant that role, administrator access within the account in order to allow the stackset master role, to deploy stacks within it.  
 
@@ -15,8 +13,6 @@ Stacksets allow the ability to deploy a single AWS CloudFormation template into 
 <br><br>  
 
 ## Pre-Requisite Templates
-
------
 
 The Following Templates are Pre-Requisite Templates that are required for this template to run as they will include previously provisioned resource exports that will be consumed by this template.  
 
@@ -29,8 +25,6 @@ The Following Templates are Pre-Requisite Templates that are required for this t
 <br><br>  
 
 ## Parameters
-
------
 
 The template takes the following parameters at launch:  
 
@@ -83,8 +77,6 @@ __Note: This parameter specifies the region where the roles/policies will be pro
 
 ## Example Parameter Values
 
------  
-
 <br>  
 
 ![StackSet_Master_Template_Parameters](Images/ScreenShots/CloudFormation-StackSet-MasterMemberAccountConfig-MasterRole-Parameters.png)  
@@ -96,8 +88,6 @@ __Note: This parameter specifies the region where the roles/policies will be pro
 <br><br>  
 
 ## Resources
-
------
 
 The template will create the following resources at launch (Only in the specified region that was set as the value for the ${MasterRegion} key located in the following Map *RoleMap:Metadata:MasterRegion*
 
@@ -188,15 +178,13 @@ StackSetMemberExecutionRole:
 
 ## Exports
 
------
-
 The following exports will be created in __ALL__ Regions:
 
 <br>  
 
-| Output Logical ID:                      | Output:                                              | Output Value:                                                                                       | Export:                                                           |
-|---------------------------------------- |----------------------------------------------------- |---------------------------------------------------------------------------------------------------- |------------------------------------------------------------------ |
-| CloudFormationStackSetMasterRoleName     | CloudFormation IAM StackSet Master Admin Role               | ```AWSCloudFormationStackSetAdministrationRole```                                                   | AWS-CloudFormation-StackSet-Master-Administration-Role                       |
-| CloudFormationStackSetMasterRoleArn      | CloudFormation IAM StackSet Master Admin Role ARN           | ```arn:aws:iam::123456789101:role/AWSCloudFormationStackSetAdministrationRole```                      | AWS-CloudFormation-StackSet-Master-Administration-Role-ARN                   |
-| CloudFormationStackSetMemberRoleName | CloudFormation IAM StackSet Member Execution Role           | ```AWSCloudFormationStackSetExecutionRole```                                                        | AWS-CloudFormation-StackSet-Member-Role                            |
-| CloudFormationStackSetMemberRoleArn  | CloudFormation IAM StackSet Member Execution Role ARN       | ```arn:aws:iam::109876543210:role/AWSCloudFormationStackSetExecutionRole```                           | AWS-CloudFormation-StackSet-Member-Role-ARN                        |
+| Output Logical ID:                      | Output:                                               | Output Value:                                                                                  | Export:                                                           |
+|---------------------------------------- |------------------------------------------------------ |----------------------------------------------------------------------------------------------- |------------------------------------------------------------------ |
+| CloudFormationStackSetMasterRoleName    | CloudFormation IAM StackSet Master Admin Role         | ```AWSCloudFormationStackSetAdministrationRole```                                              | AWS-CloudFormation-StackSet-Master-Administration-Role            |
+| CloudFormationStackSetMasterRoleArn     | CloudFormation IAM StackSet Master Admin Role ARN     | ```arn:aws:iam::123456789101:role/AWSCloudFormationStackSetAdministrationRole```               | AWS-CloudFormation-StackSet-Master-Administration-Role-ARN        |
+| CloudFormationStackSetMemberRoleName    | CloudFormation IAM StackSet Member Execution Role     | ```AWSCloudFormationStackSetExecutionRole```                                                   | AWS-CloudFormation-StackSet-Member-Role                           |
+| CloudFormationStackSetMemberRoleArn     | CloudFormation IAM StackSet Member Execution Role ARN | ```arn:aws:iam::109876543210:role/AWSCloudFormationStackSetExecutionRole```                    | AWS-CloudFormation-StackSet-Member-Role-ARN                       |
