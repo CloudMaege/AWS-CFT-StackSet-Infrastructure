@@ -118,8 +118,6 @@ Mappings:
 
 <br>  
 
------  
-
 ```yaml
   StackSetMasterRole:
     AssumeRolePolicyDocument:
@@ -156,8 +154,6 @@ Mappings:
 > __NOTE: This role MUST be named *AWSCloudFormationStackSetExecutionRole* in order for it to be acknowledged and used by CloudFormation. The CloudFormation service expects to find that specific role name, enabling the StackSet master admin account role to assume this provisioned member role...__
 
 <br>  
-
------  
 
 ```yaml
 StackSetMemberExecutionRole:
